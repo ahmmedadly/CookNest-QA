@@ -1,0 +1,352 @@
+{
+	"info": {
+		"_postman_id": "c99ea94c-af8b-4518-84ad-b856fb189e80",
+		"name": "CookNest API Testing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "45968237",
+		"_collection_link": "https://ahmed-1719976.postman.co/workspace/Ahmed's-Workspace~8cf93bc6-6c15-4bf1-8bd4-2f02e72fa3d1/collection/45968237-c99ea94c-af8b-4518-84ad-b856fb189e80?action=share&source=collection_link&creator=45968237"
+	},
+	"item": [
+		{
+			"name": "Get Random Meal",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response body is not empty\", function () {",
+							"    pm.expect(pm.response.text()).to.not.be.empty;",
+							"});",
+							"pm.test(\"Meal object exists\", function () {",
+							"    const json = pm.response.json();",
+							"    pm.expect(json.meals).to.not.be.null;",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/random.php",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"random.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Meal by Name",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response body is not empty\", function () {",
+							"    pm.expect(pm.response.text()).to.not.be.empty;",
+							"});",
+							"",
+							"pm.test(\"Meal name contains search keyword\", function () {",
+							"    const mealName = pm.response.json().meals[0].strMeal;",
+							"    pm.expect(mealName.toLowerCase()).to.include(\"arrabiata\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/search.php?s=Arrabiata",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"search.php"
+					],
+					"query": [
+						{
+							"key": "s",
+							"value": "Arrabiata"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Categories",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response body is not empty\", function () {",
+							"    pm.expect(pm.response.text()).to.not.be.empty;",
+							"});",
+							"pm.test(\"Categories list returned\", function () {",
+							"    pm.expect(pm.response.json().categories.length).to.be.above(0);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/categories.php",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"categories.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Filter by Category",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response body is not empty\", function () {",
+							"    pm.expect(pm.response.text()).to.not.be.empty;",
+							"});",
+							"pm.test(\"Meals list returned\", function () {",
+							"    pm.expect(pm.response.json().meals.length).to.be.above(0);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/filter.php?c=Seafood",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"filter.php"
+					],
+					"query": [
+						{
+							"key": "c",
+							"value": "Seafood"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Filter by Country",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response body is not empty\", function () {",
+							"    pm.expect(pm.response.text()).to.not.be.empty;",
+							"});",
+							"pm.test(\"Meals list returned\", function () {",
+							"    pm.expect(pm.response.json().meals.length).to.be.above(0);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/filter.php?a=Canadian",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"filter.php"
+					],
+					"query": [
+						{
+							"key": "a",
+							"value": "Canadian"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Meal Details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response body is not empty\", function () {",
+							"    pm.expect(pm.response.text()).to.not.be.empty;",
+							"});",
+							"pm.test(\"Meal has ingredients and instructions\", function () {",
+							"    const meal = pm.response.json().meals[0];",
+							"    pm.expect(meal.strInstructions).to.not.be.empty;",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/lookup.php?i=52772",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"lookup.php"
+					],
+					"query": [
+						{
+							"key": "i",
+							"value": "52772"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid Meal ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response body is not empty\", function () {",
+							"    pm.expect(pm.response.text()).to.not.be.empty;",
+							"});",
+							"",
+							"pm.test(\"Meals is null for invalid ID\", function () {",
+							"    pm.expect(pm.response.json().meals).to.eql(null);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/lookup.php\n?i=999999",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"lookup.php\n"
+					],
+					"query": [
+						{
+							"key": "i",
+							"value": "999999"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": ""
+		}
+	]
+}
